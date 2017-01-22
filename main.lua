@@ -13,7 +13,10 @@ function love.load()
 	b = a:clone(function(self)
 		self:seek(nil,1)
 	end)
-	level = Instance:new("Map")
+	level = Instance:new("Map",function(self)
+		self.x = 4
+		self.y = 4
+	end)
 	t = Instance:new("Tile")
 	level:addTile(t:clone(function(self)
 		self.image = a
@@ -63,12 +66,13 @@ function love.load()
 	UI = Instance:new("UI")
 	UI:add(Instance:new("Label",function(self)
 		self.text = "Hello There! Hello World!"
-		self.textWrap = true
+		self.textWrap = false
+		self.textAlign = "topright"
+		self.textColor = Color:new(255,0,0)
 		self.image = a
-		self.size.scale = Vector2:new(0.25,0.25)
-		self.position.scale.x = 0.375
-		self.position.scale.y = 0.375
-		self.fillColor.r = 0
+		self.scale.size = Vector2:new(0.25,0.25)
+		self.scale.position.x = 0.375
+		self.scale.position.y = 0.375
 		self.outlineColor.r = 255
 	end))
 end
@@ -79,8 +83,8 @@ function love.update(dt)
 end
 
 function love.draw()
-	level:draw(0,0,0,2,2)
-	UI:draw(0,0,math.pi/12,1,1)
+	level:draw(100,100,0,2,2)
+	UI:draw(0,0,math.pi/4,1,1)
 
 	-- Stats
 	love.graphics.origin()
